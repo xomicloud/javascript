@@ -38,19 +38,19 @@ module.exports = {
 };
 
 function createHomePageLinks(loggedIn) {
-  const { LOG_OUT_PATH,
-          LOG_IN_OAUTH_PATH,
+  const { SIGN_OUT_PATH,
+          SIGN_IN_OAUTH_PATH,
           SETTINGS_PAGE_PATH,
           TEMPLATE_DIRECTORY_PATH,
-          LOGGED_IN_LINKS_TEMPLATE_FILE_NAME,
-          LOGGED_OUT_LINKS_TEMPLATE_FILE_NAME } = constants,
+          SIGNED_IN_LINKS_TEMPLATE_FILE_NAME,
+          SIGNED_OUT_LINKS_TEMPLATE_FILE_NAME } = constants,
           homePageLinksTemplateFileName = loggedIn ?
-                                          LOGGED_IN_LINKS_TEMPLATE_FILE_NAME :
-                                            LOGGED_OUT_LINKS_TEMPLATE_FILE_NAME,
+                                          SIGNED_IN_LINKS_TEMPLATE_FILE_NAME :
+                                            SIGNED_OUT_LINKS_TEMPLATE_FILE_NAME,
         homePageLinksTemplateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${homePageLinksTemplateFileName}`,
         args = {
-          LOG_OUT_PATH,
-          LOG_IN_OAUTH_PATH,
+          SIGN_OUT_PATH,
+          SIGN_IN_OAUTH_PATH,
           SETTINGS_PAGE_PATH
         },
         homePageLinks = parseFile(homePageLinksTemplateFilePath, args); ///
@@ -59,10 +59,10 @@ function createHomePageLinks(loggedIn) {
 }
 
 function createSettingsPageLinks() {
-  const { LOG_OUT_PATH, TEMPLATE_DIRECTORY_PATH, SETTINGS_LINKS_TEMPLATE_FILE_NAME } = constants,
+  const { SIGN_OUT_PATH, TEMPLATE_DIRECTORY_PATH, SETTINGS_LINKS_TEMPLATE_FILE_NAME } = constants,
         settingsPageLinksTemplateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${SETTINGS_LINKS_TEMPLATE_FILE_NAME}`,
         args = {
-          LOG_OUT_PATH
+          SIGN_OUT_PATH
         },
         settingsPageLinks = parseFile(settingsPageLinksTemplateFilePath, args); ///
 

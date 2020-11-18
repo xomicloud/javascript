@@ -7,7 +7,7 @@ const constants = require("../constants"),
 const { removeAccessTokenCookie } = cookieUtilities,
       { setHomePageRedirectHeaders } = headersUtilities;
 
-function logOutHandler(request, response, next) {
+function signOutHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants;
 
   setHomePageRedirectHeaders(response);
@@ -19,4 +19,4 @@ function logOutHandler(request, response, next) {
   response.end("");
 }
 
-module.exports = logOutHandler;
+module.exports = signOutHandler;

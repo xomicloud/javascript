@@ -5,7 +5,7 @@ const constants = require("../../constants"),
 
 const { setOAuth2AuthorizeHeaders } = headersUtilities;
 
-function logInOAuthHandler(request, response, next) {
+function signInOAuthHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants;
 
   setOAuth2AuthorizeHeaders(response);
@@ -15,4 +15,4 @@ function logInOAuthHandler(request, response, next) {
   response.end("");
 }
 
-module.exports = logInOAuthHandler;
+module.exports = signInOAuthHandler;
