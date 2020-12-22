@@ -20,10 +20,10 @@ function createCallbackPostHeaders() {
 }
 
 function createCallbackPostParameters(code) {
-  const { CALLBACK_OAUTH_PATH, AUTHORIZATION_CODE_GRANT_TYPE } = constants,
-        { HOST } = process.env,
+  const { REDIRECT_URI } = process.env,
+        { AUTHORIZATION_CODE_GRANT_TYPE } = constants,
         grant_type = AUTHORIZATION_CODE_GRANT_TYPE,  ///
-        redirect_uri = `${HOST}${CALLBACK_OAUTH_PATH}`,  ///
+        redirect_uri = REDIRECT_URI,  ///
         callbackPostParameters = {
           "code" : code,
           "grant_type" : grant_type,

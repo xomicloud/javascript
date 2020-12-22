@@ -1,5 +1,6 @@
 .idea
-
+.terraform
+terraform.*
 tmp
 .vscode
 .DS_Store

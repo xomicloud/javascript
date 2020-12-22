@@ -2,16 +2,19 @@
 
 const express = require("express");
 
-const constants = require("../constants"),
-      signOutHandler = require("../handler/signOut"),
-      homePageHandler = require("../handler/page/home");
+const paths = require("../paths"),
+      signInHandler = require("../handler/signIn"),
+      callbackHandler = require("../handler/callback"),
+      landingPageHandler = require("../handler/page/landing");
 
-const { SIGN_OUT_PATH, HOME_PAGE_PATH } = constants;
+const { SIGN_IN_PATH, CALLBACK_PATH, LANDING_PAGE_PATH } = paths;
 
 const unrestrictedRouter = express.Router(); ///
 
-unrestrictedRouter.get(SIGN_OUT_PATH, signOutHandler);
+unrestrictedRouter.get(SIGN_IN_PATH, signInHandler);
 
-unrestrictedRouter.get(HOME_PAGE_PATH, homePageHandler);
+unrestrictedRouter.get(CALLBACK_PATH, callbackHandler);
+
+unrestrictedRouter.get(LANDING_PAGE_PATH, landingPageHandler);
 
 module.exports = unrestrictedRouter;

@@ -1,70 +1,49 @@
 "use strict";
 
-const constants = require("../constants"),
+const paths = require("../paths"),
+      constants = require("../constants"),
       templateUtilities = require('../utilities/template');
 
 const { parseFile } = templateUtilities;
 
-function createHomePageContent(loggedIn) {
-  const { TEMPLATE_DIRECTORY_PATH, HOME_PAGE_TEMPLATE_FILE_NAME } = constants,
-          homePageTemplateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${HOME_PAGE_TEMPLATE_FILE_NAME}`,
-          homePageLinks = createHomePageLinks(loggedIn),
-          links = homePageLinks,  ///
-          args = {
-            links
-          },
-          homePageContent = parseFile(homePageTemplateFilePath, args);
+function createLandingPageContent(signedIn) {
+  const { SIGN_IN_PATH, SIGN_OUT_PATH, ACCOUNT_PAGE_PATH } = paths,
+        { LANDING_PAGE_SIGNED_IN_TEMPLATE_FILE_NAME, LANDING_PAGE_SIGNED_OUT_TEMPLATE_FILE_NAME } = constants,
+        landingPageTemplateFileName = signedIn ?
+                                        LANDING_PAGE_SIGNED_IN_TEMPLATE_FILE_NAME :
+                                          LANDING_PAGE_SIGNED_OUT_TEMPLATE_FILE_NAME,
+        args = {
+          SIGN_IN_PATH,
+          SIGN_OUT_PATH,
+          ACCOUNT_PAGE_PATH
+        },
+        landingPageContent = parseTemplateFile(landingPageTemplateFileName, args);
 
-  return homePageContent;
+  return landingPageContent;
 }
 
-function createSettingsPageContent() {
-  const { HOME_PAGE_PATH, TEMPLATE_DIRECTORY_PATH, SETTINGS_PAGE_TEMPLATE_FILE_NAME } = constants,
-        settingsPageTemplateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${SETTINGS_PAGE_TEMPLATE_FILE_NAME}`,
-        settingsPageLinks = createSettingsPageLinks(),
-        links = settingsPageLinks,  ///
+function createAccountPageContent() {
+  const { SIGN_OUT_PATH, LANDING_PAGE_PATH } = paths,
+        { ACCOUNT_PAGE_TEMPLATE_FILE_NAME } = constants,
+        accountPageTemplateFileName = ACCOUNT_PAGE_TEMPLATE_FILE_NAME,  ///
         args = {
-          links,
-          HOME_PAGE_PATH
+          SIGN_OUT_PATH,
+          LANDING_PAGE_PATH
         },
-        settingsPageContent = parseFile(settingsPageTemplateFilePath, args);
+        accountPageContent = parseTemplateFile(accountPageTemplateFileName, args);
 
-  return settingsPageContent;
+  return accountPageContent;
 }
 
 module.exports = {
-  createHomePageContent,
-  createSettingsPageContent
+  createLandingPageContent,
+  createAccountPageContent
 };
 
-function createHomePageLinks(loggedIn) {
-  const { SIGN_OUT_PATH,
-          SIGN_IN_OAUTH_PATH,
-          SETTINGS_PAGE_PATH,
-          TEMPLATE_DIRECTORY_PATH,
-          SIGNED_IN_LINKS_TEMPLATE_FILE_NAME,
-          SIGNED_OUT_LINKS_TEMPLATE_FILE_NAME } = constants,
-          homePageLinksTemplateFileName = loggedIn ?
-                                          SIGNED_IN_LINKS_TEMPLATE_FILE_NAME :
-                                            SIGNED_OUT_LINKS_TEMPLATE_FILE_NAME,
-        homePageLinksTemplateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${homePageLinksTemplateFileName}`,
-        args = {
-          SIGN_OUT_PATH,
-          SIGN_IN_OAUTH_PATH,
-          SETTINGS_PAGE_PATH
-        },
-        homePageLinks = parseFile(homePageLinksTemplateFilePath, args); ///
+function parseTemplateFile(templateFileName, args) {
+  const { TEMPLATE_DIRECTORY_PATH } = constants,
+        templateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${templateFileName}`,
+        content = parseFile(templateFilePath, args);
 
-  return homePageLinks;
-}
-
-function createSettingsPageLinks() {
-  const { SIGN_OUT_PATH, TEMPLATE_DIRECTORY_PATH, SETTINGS_LINKS_TEMPLATE_FILE_NAME } = constants,
-        settingsPageLinksTemplateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${SETTINGS_LINKS_TEMPLATE_FILE_NAME}`,
-        args = {
-          SIGN_OUT_PATH
-        },
-        settingsPageLinks = parseFile(settingsPageLinksTemplateFilePath, args); ///
-
-  return settingsPageLinks;
+  return content;
 }

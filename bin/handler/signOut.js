@@ -5,14 +5,14 @@ const constants = require("../constants"),
       headersUtilities = require("../utilities/headers");
 
 const { removeAccessTokenCookie } = cookieUtilities,
-      { setHomePageRedirectHeaders } = headersUtilities;
+      { setAuthoriseLocationHeader } = headersUtilities;
 
 function signOutHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants;
 
-  setHomePageRedirectHeaders(response);
-
   removeAccessTokenCookie(response);
+
+  setAuthoriseLocationHeader(response);
 
   response.status(SEE_OTHER_303_STATUS_CODE);
 

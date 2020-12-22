@@ -2,13 +2,16 @@
 
 const express = require("express");
 
-const constants = require("../constants"),
-      settingsPageHandler = require("../handler/page/settings");
+const paths = require("../paths"),
+      signOutHandler = require("../handler/signOut"),
+      accountPageHandler = require("../handler/page/account");
 
-const { SETTINGS_PAGE_PATH } = constants;
+const { SIGN_OUT_PATH, ACCOUNT_PAGE_PATH } = paths;
 
 const restrictedRouter = express.Router(); ///
 
-restrictedRouter.get(SETTINGS_PAGE_PATH, settingsPageHandler);
+restrictedRouter.get(SIGN_OUT_PATH, signOutHandler);
+
+restrictedRouter.get(ACCOUNT_PAGE_PATH, accountPageHandler);
 
 module.exports = restrictedRouter;
