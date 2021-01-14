@@ -1,7 +1,7 @@
 .idea
 .terraform
 terraform.*
-tmp
+lambda.zip
 .vscode
 .DS_Store
 node_modules
