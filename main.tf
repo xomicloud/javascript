@@ -21,9 +21,16 @@ resource "aws_iam_role" "lambda_role" {
 EOF
 }
 
+/*
+data aws_iam_role "lambda_role" {
+  name = "lambda_role"
+}
+*/
+
 resource "aws_lambda_function" "lambda_function" {
+//role             = data.aws_iam_role.lambda_role.arn
   role             = aws_iam_role.lambda_role.arn
-  handler          = "index.handler"
+  handler          = "lambda.handler"
   runtime          = "nodejs12.x"
   filename         = "lambda.zip"
   function_name    = "lambda_function"
