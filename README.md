@@ -1,10 +1,10 @@
-# Xomi - Lambda JavaScript Application
+# Xomi - JavaScript Application
 
 ## Introduction
 
-This is a bare bones JavaScript server application, packaged as an AWS lambda, with an unrestricted home page and a restricted settings page together with login and logout endpoints and an OAuth callback endpoint.
+This is a bare bones JavaScript server application which can packaged as an AWS lambda or run standalone. It has an unrestricted home page and a restricted settings page together with sign in and sign out endpoints and an OAuth callback endpoint.
 
 ## Contact
 
-* contact@xomi.cloud
+* contactus@xomi.cloud
 * https://xomi.cloud
