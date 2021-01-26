@@ -34,7 +34,7 @@ resource "aws_lambda_function" "lambda_function" {
   runtime          = "nodejs12.x"
   filename         = "lambda.zip"
   function_name    = "lambda_function"
-  source_code_hash = "${filesha256("lambda.zip")}"
+  source_code_hash = filesha256("lambda.zip")
 }
 
 resource "aws_lambda_permission" "lambda_permission" {
