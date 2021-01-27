@@ -13,3 +13,5 @@ app.use(cookieParser);
 app.use(restrictedRouter);
 
 app.use(unrestrictedRouter);
+
+module.exports = app;
