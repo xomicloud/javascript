@@ -6,38 +6,20 @@ const paths = require("../paths"),
 
 const { parseFile } = templateUtilities;
 
-function createLandingPageContent(signedIn) {
-  const { SIGN_IN_PATH, SIGN_OUT_PATH, ACCOUNT_PAGE_PATH } = paths,
-        { LANDING_PAGE_SIGNED_IN_TEMPLATE_FILE_NAME, LANDING_PAGE_SIGNED_OUT_TEMPLATE_FILE_NAME } = constants,
-        landingPageTemplateFileName = signedIn ?
-                                        LANDING_PAGE_SIGNED_IN_TEMPLATE_FILE_NAME :
-                                          LANDING_PAGE_SIGNED_OUT_TEMPLATE_FILE_NAME,
+function createHomePageContent() {
+  const { SIGN_OUT_PATH } = paths,
+        { HOME_PAGE_TEMPLATE_FILE_NAME } = constants,
+        homePageTemplateFileName = HOME_PAGE_TEMPLATE_FILE_NAME,  ///
         args = {
-          SIGN_IN_PATH,
-          SIGN_OUT_PATH,
-          ACCOUNT_PAGE_PATH
+          SIGN_OUT_PATH
         },
-        landingPageContent = parseTemplateFile(landingPageTemplateFileName, args);
+        homePageContent = parseTemplateFile(homePageTemplateFileName, args);
 
-  return landingPageContent;
-}
-
-function createAccountPageContent() {
-  const { SIGN_OUT_PATH, LANDING_PAGE_PATH } = paths,
-        { ACCOUNT_PAGE_TEMPLATE_FILE_NAME } = constants,
-        accountPageTemplateFileName = ACCOUNT_PAGE_TEMPLATE_FILE_NAME,  ///
-        args = {
-          SIGN_OUT_PATH,
-          LANDING_PAGE_PATH
-        },
-        accountPageContent = parseTemplateFile(accountPageTemplateFileName, args);
-
-  return accountPageContent;
+  return homePageContent;
 }
 
 module.exports = {
-  createLandingPageContent,
-  createAccountPageContent
+  createHomePageContent
 };
 
 function parseTemplateFile(templateFileName, args) {

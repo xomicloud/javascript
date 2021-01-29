@@ -5,11 +5,11 @@ const constants = require("../../constants"),
       contentUtilities = require("../../utilities/content"),
       headersUtilities = require("../../utilities/headers");
 
-const { createAccountPageContent } = contentUtilities,
+const { createHomePageContent } = contentUtilities,
       { isAccessTokenCookiePresent } = cookieUtilities,
       { setAuthoriseLocationHeader } = headersUtilities;
 
-function accountPageHandler(request, response, next) {
+function homePageHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants,
         accessTokenCookiePresent = isAccessTokenCookiePresent(request),
         signedIn = accessTokenCookiePresent;  ///
@@ -25,8 +25,8 @@ function accountPageHandler(request, response, next) {
   }
 
   const { OK_200_STATUS_CODE, TEXT_HTML_CONTENT_TYPE } = constants,
-        accountPageContent = createAccountPageContent(),
-        content = accountPageContent;  ///
+        homePageContent = createHomePageContent(),
+        content = homePageContent;  ///
 
   response.setHeader("Content-Type", TEXT_HTML_CONTENT_TYPE);
 
@@ -35,4 +35,4 @@ function accountPageHandler(request, response, next) {
   response.end(content);
 }
 
-module.exports = accountPageHandler;
+module.exports = homePageHandler;

@@ -5,7 +5,7 @@ const constants = require("../constants"),
 
 const { encodeParameters } = encodingUtilities;
 
-function setAuthoriseLocationHeader(response) {
+function setAuthoriseLocationHeader(response, createAccount = false) {
   const { CLIENT_ID, CLIENT_HOST, REDIRECT_URI } = process.env,
         { CODE_RESPONSE_TYPE, OPEN_ID_SCOPE, EMPTY_STATE } = constants,
         state = EMPTY_STATE, ///
@@ -19,8 +19,17 @@ function setAuthoriseLocationHeader(response) {
           "client_id" : client_id,
           "redirect_uri" : redirect_uri,
           "response_type" : response_type
-        },
-        encodedParameters = encodeParameters(parameters),
+        };
+
+  if (createAccount) {
+    const create_account = createAccount; ///
+
+    Object.assign(parameters, {
+      "create_account": create_account
+    });
+  }
+
+  const encodedParameters = encodeParameters(parameters),
         queryString = encodedParameters,  ///
         Location = `${CLIENT_HOST}?${queryString}`;
 

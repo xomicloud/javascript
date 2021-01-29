@@ -24,9 +24,9 @@ function callbackHandler(request, response, next) {
     const { access_token } = json;
 
     if (access_token) {
-      const { ACCOUNT_PAGE_PATH } = paths,
+      const { HOME_PAGE_PATH } = paths,
             { SEE_OTHER_303_STATUS_CODE } = constants,
-            Location = ACCOUNT_PAGE_PATH; ///
+            Location = HOME_PAGE_PATH; ///
 
       setAccessTokenCookie(response, access_token);
 
