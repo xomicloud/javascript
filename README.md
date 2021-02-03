@@ -8,7 +8,7 @@ This is a bare bones JavaScript secure application which can run as an AWS lambd
 
 There is a tutorial that will show you how to get this application deployed to AWS in a few easy steps on the Xomi developers site:
 
-* [JavaScript Lambda Tutorial](https://developers.xomi.cloud/tutorial/javascript-lambda)
+* [Xomi Developers - JavaScript Lambda Tutorial](https://developers.xomi.cloud/tutorial/javascript-lambda)
 
 ## Running standalone
 
@@ -19,7 +19,7 @@ If you want to get this application up and running locally then you will need to
 3. **Host:** 'http://localhost:8080', assuming you intend to run it on port 8080.
 4. **Redirect URI:** 'http://localhost:8080/callback'.
 
-Now click on 'Clients' in the menu and then on the name of the client you have just created. Next, copy the environment variables into a file in the root of the repository. We recommend the name `variables.env` since Git is configured to ignore this. Add an environment variable for the port, as well, so that your file looks something like this:
+Now click on 'Clients' and then on the name of the client you have just created. Next, copy the environment variables into a file in the root directory. We recommend the name `variables.env` since Git is configured to ignore this. You should also add an environment variable for the port, so that your file looks something like this:
 
 ```
 export PORT=8080
@@ -28,7 +28,7 @@ export CLIENT_HOST=https://authenticate.xomi.cloud
 export CLIENT_SECRET=Uk1dCMCeE46mutwDmFsNxylweHeaOCCN
 export REDIRECT_URI=http://localhost:8080/callback
 ```
-Next open a shell window and run the following command to export the environment variables:
+Next, open a shell window and run the following command to export the environment variables:
 
 ```
 source variables.env
@@ -39,11 +39,11 @@ Finally, install the dependencies with [npm](https://www.npmjs.com/) and run the
 npm install
 node ./bin/main.js
 ```
-The application will now be available at the following address:
+It will now be available at the following address:
 
 * http://localhost:8080
 
-Note that the first time you run the application, you will immediately be redirected to Xomi's authentication portal and will have to create a Xomi account. This account is associated with the client you have just created and is nothing to do with your Xomi account.
+Note that the first time you run the application, you will immediately be redirected to Xomi's authentication portal and will have to create a Xomi account. This account is associated with the client you have just created and is entirely separate from your Xomi account.
 
 ## Contact
 
