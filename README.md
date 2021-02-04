@@ -4,6 +4,8 @@
 
 This is a bare bones JavaScript secure application which can run standalone or as an AWS lambda.
 
+## Running standalone
+
 If you want to get this application up and running locally then you will need to integrate it with a Xomi client. Assuming that you have a Xomi account, run the create client wizard from the account home page with these values:
 
 1. **Name:** Anything you like, such as 'lambda-tutorial (localhost)'.
@@ -42,8 +44,6 @@ Note that the first time you run the application, you will immediately be redire
 There is a tutorial that will show you how to get this application deployed to AWS in a few easy steps on the Xomi developers site:
 
 * [Xomi Developers - JavaScript Lambda Tutorial](https://developers.xomi.cloud/tutorial/javascript-lambda)
-
-## Running standalone
 
 ## Contact
 
