@@ -2,15 +2,7 @@
 
 ## Introduction
 
-This is a bare bones JavaScript secure application which can run as an AWS lambda or standalone.
-
-## Running as an AWS lambda
-
-There is a tutorial that will show you how to get this application deployed to AWS in a few easy steps on the Xomi developers site:
-
-* [Xomi Developers - JavaScript Lambda Tutorial](https://developers.xomi.cloud/tutorial/javascript-lambda)
-
-## Running standalone
+This is a bare bones JavaScript secure application which can run standalone or as an AWS lambda.
 
 If you want to get this application up and running locally then you will need to integrate it with a Xomi client. Assuming that you have a Xomi account, run the create client wizard from the account home page with these values:
 
@@ -23,9 +15,9 @@ Now click on 'Clients' and then on the name of the client you have just created.
 
 ```
 export PORT=8080
-export CLIENT_ID=wB4G2i2UUonztpCI
+export CLIENT_ID=wBcG2deUEonctRCs
 export CLIENT_HOST=https://authenticate.xomi.cloud
-export CLIENT_SECRET=Uk1dCMCeE46mutwDmFsNxylweHeaOCCN
+export CLIENT_SECRET=PdiddMCeX46mutwDgsEFsNxylfeveaOcEF
 export REDIRECT_URI=http://localhost:8080/callback
 ```
 Next, open a shell window and run the following command to export the environment variables:
@@ -44,6 +36,14 @@ It will now be available at the following address:
 * http://localhost:8080
 
 Note that the first time you run the application, you will immediately be redirected to Xomi's authentication portal and will have to create a Xomi account. This account is associated with the client you have just created and is entirely separate from your Xomi account.
+
+## Running as an AWS lambda
+
+There is a tutorial that will show you how to get this application deployed to AWS in a few easy steps on the Xomi developers site:
+
+* [Xomi Developers - JavaScript Lambda Tutorial](https://developers.xomi.cloud/tutorial/javascript-lambda)
+
+## Running standalone
 
 ## Contact
 
