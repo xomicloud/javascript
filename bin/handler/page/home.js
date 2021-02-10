@@ -6,13 +6,13 @@ const constants = require("../../constants"),
       headersUtilities = require("../../utilities/headers");
 
 const { createHomePageContent } = contentUtilities,
-      { isAccessTokenCookiePresent } = cookieUtilities,
-      { setAuthoriseLocationHeader } = headersUtilities;
+      { setAuthoriseLocationHeader } = headersUtilities,
+      { isAuthenticationCookiePresent } = cookieUtilities;
 
 function homePageHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants,
-        accessTokenCookiePresent = isAccessTokenCookiePresent(request),
-        signedIn = accessTokenCookiePresent;  ///
+        authenticationCookiePresent = isAuthenticationCookiePresent(request),
+        signedIn = authenticationCookiePresent;  ///
 
   if (!signedIn) {
     setAuthoriseLocationHeader(response);

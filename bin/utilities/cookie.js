@@ -2,34 +2,28 @@
 
 const constants = require("../constants");
 
-function setAccessTokenCookie(response, access_token) {
-  const { ACCESS_TOKEN_COOKIE_NAME } = constants;
+function setAuthenticationCookie(response, access_token) {
+  const { AUTHENTICATION_COOKIE_NAME } = constants;
 
-  response.cookie(ACCESS_TOKEN_COOKIE_NAME, access_token);
+  response.cookie(AUTHENTICATION_COOKIE_NAME, access_token);
 }
 
-function removeAccessTokenCookie(response) {
-  const { ACCESS_TOKEN_COOKIE_NAME } = constants;
+function removeAuthenticationCookie(response) {
+  const { AUTHENTICATION_COOKIE_NAME } = constants;
 
-  response.clearCookie(ACCESS_TOKEN_COOKIE_NAME);
+  response.clearCookie(AUTHENTICATION_COOKIE_NAME);
 }
 
-function isAccessTokenCookiePresent(request) {
-  const access_token = getAccessTokenFromCookie(request),
-        accessTokenCookiePresent = !!access_token;
+function isAuthenticationCookiePresent(request) {
+  const { cookies } = request,
+        { AUTHENTICATION_COOKIE_NAME } = constants,
+        authenticationCookiePresent = !!cookies[AUTHENTICATION_COOKIE_NAME];
 
-  return accessTokenCookiePresent;
+  return authenticationCookiePresent;
 }
 
 module.exports = {
-  setAccessTokenCookie,
-  removeAccessTokenCookie,
-  isAccessTokenCookiePresent
+  setAuthenticationCookie,
+  removeAuthenticationCookie,
+  isAuthenticationCookiePresent
 };
-
-function getAccessTokenFromCookie(request) {
-  const { cookies } = request,
-        { access_token } = cookies;
-
-  return access_token;
-}

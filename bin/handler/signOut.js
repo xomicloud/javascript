@@ -4,15 +4,16 @@ const constants = require("../constants"),
       cookieUtilities = require("../utilities/cookie"),
       headersUtilities = require("../utilities/headers");
 
-const { removeAccessTokenCookie } = cookieUtilities,
+const { removeAuthenticationCookie } = cookieUtilities,
       { setAuthoriseLocationHeader } = headersUtilities;
 
 function signOutHandler(request, response, next) {
-  const { SEE_OTHER_303_STATUS_CODE } = constants;
+  const { SEE_OTHER_303_STATUS_CODE } = constants,
+        createAccount = true;
 
-  removeAccessTokenCookie(response);
+  removeAuthenticationCookie(response);
 
-  setAuthoriseLocationHeader(response);
+  setAuthoriseLocationHeader(response, createAccount);
 
   response.status(SEE_OTHER_303_STATUS_CODE);
 

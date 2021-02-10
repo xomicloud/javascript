@@ -7,7 +7,7 @@ const paths = require("../paths"),
       callbackUtilities = require("../utilities/callback");
 
 const { post } = postUtilities,
-      { setAccessTokenCookie } = cookieUtilities,
+      { setAuthenticationCookie } = cookieUtilities,
       { createCallbackPostHeaders, createCallbackPostParameters } = callbackUtilities;
 
 function callbackHandler(request, response, next) {
@@ -21,30 +21,28 @@ function callbackHandler(request, response, next) {
         parameters = callbackPostParameters;  ///
 
   post(url, headers, parameters, (json) => {
-    const { access_token } = json;
+    const { access_token } = json,
+          { SEE_OTHER_303_STATUS_CODE } = constants;
+
+    let Location;
 
     if (access_token) {
-      const { HOME_PAGE_PATH } = paths,
-            { SEE_OTHER_303_STATUS_CODE } = constants,
-            Location = HOME_PAGE_PATH; ///
+      const { HOME_PAGE_PATH } = paths;
 
-      setAccessTokenCookie(response, access_token);
+      Location = HOME_PAGE_PATH; ///
 
-      response.setHeader("Location", Location);
-
-      response.status(SEE_OTHER_303_STATUS_CODE);
-
-      response.end("");
+      setAuthenticationCookie(response, access_token);
     } else {
-      const { TEXT_PLAIN_CONTENT_TYPE, INTERNAL_SERVER_ERROR_500_MESSAGE, INTERNAL_SERVER_ERROR_500_STATUS_CODE } = constants,
-            content = INTERNAL_SERVER_ERROR_500_MESSAGE;  ///
+      const { SIGN_IN_PATH } = paths;
 
-      response.setHeader("Content-Type", TEXT_PLAIN_CONTENT_TYPE);
-
-      response.status(INTERNAL_SERVER_ERROR_500_STATUS_CODE);
-
-      response.end(content);
+      Location = SIGN_IN_PATH;  ///
     }
+
+    response.setHeader("Location", Location);
+
+    response.status(SEE_OTHER_303_STATUS_CODE);
+
+    response.end("");
   });
 }
 
