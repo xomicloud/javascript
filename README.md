@@ -41,8 +41,7 @@ Note that the first time you run the application, you will immediately be redire
 
 ## Running as an AWS lambda
 
-There is a tutorial that will show you how to get this application deployed to AWS in a few easy steps on the Xomi developers site:
-
+There is a tutorial that will show you how to get this application deployed to AWS in a few easy steps on the Xomi developers site, a link to which can be found in the related links section below.
 
 When running the application as a lambda, a different entry point is used. For running standalone, it is the `main.js` file in the `bin` directory. When running as a lambda, it is the `lambda.js` file in the `bin` director.
 
