@@ -7,7 +7,7 @@ const { setAuthoriseLocationHeader } = headersUtilities;
 
 function signInHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants,
-        createAccount = true;
+        createAccount = false;
 
   setAuthoriseLocationHeader(response, createAccount);
 

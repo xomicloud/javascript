@@ -9,7 +9,7 @@ const { removeAuthenticationCookie } = cookieUtilities,
 
 function signOutHandler(request, response, next) {
   const { SEE_OTHER_303_STATUS_CODE } = constants,
-        createAccount = true;
+        createAccount = false;
 
   removeAuthenticationCookie(response);
 

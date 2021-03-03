@@ -13,7 +13,8 @@ const { post } = postUtilities,
 function callbackHandler(request, response, next) {
   const { CLIENT_HOST } = process.env,
         { query } = request,
-        { code } = query,
+        { code, remember_me } = query,
+        rememberMe = !!remember_me,
         callbackPostHeaders = createCallbackPostHeaders(),
         callbackPostParameters = createCallbackPostParameters(code),
         url = CLIENT_HOST,  ///
@@ -27,11 +28,12 @@ function callbackHandler(request, response, next) {
     let Location;
 
     if (access_token) {
-      const { HOME_PAGE_PATH } = paths;
+      const { HOME_PAGE_PATH } = paths,
+            accessToken = access_token; ///
 
       Location = HOME_PAGE_PATH; ///
 
-      setAuthenticationCookie(response, access_token);
+      setAuthenticationCookie(response, accessToken, rememberMe);
     } else {
       const { SIGN_IN_PATH } = paths;
 
