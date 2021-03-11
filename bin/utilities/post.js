@@ -27,7 +27,7 @@ function post(url, headers, parameters, callback) {
       json = JSON.parse(jsonString);
     }
 
-    callback(json);
+    callback(error, json);
   });
 }
 

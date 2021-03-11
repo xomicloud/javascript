@@ -11,17 +11,17 @@ const { post } = postUtilities,
       { createCallbackPostHeaders, createCallbackPostParameters } = callbackUtilities;
 
 function callbackHandler(request, response, next) {
-  const { CLIENT_HOST } = process.env,
+  const { AUTHENTICATE_HOST } = process.env,
         { query } = request,
         { code, remember_me } = query,
         rememberMe = !!remember_me,
         callbackPostHeaders = createCallbackPostHeaders(),
         callbackPostParameters = createCallbackPostParameters(code),
-        url = CLIENT_HOST,  ///
+        url = AUTHENTICATE_HOST,  ///
         headers = callbackPostHeaders,  ///
         parameters = callbackPostParameters;  ///
 
-  post(url, headers, parameters, (json) => {
+  post(url, headers, parameters, (error, json) => {
     const { access_token } = json,
           { SEE_OTHER_303_STATUS_CODE } = constants;
 
