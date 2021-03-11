@@ -28,7 +28,7 @@ function homePageHandler(request, response, next) {
         homePageContent = createHomePageContent(),
         content = homePageContent;  ///
 
-  response.setHeader("Content-Type", TEXT_HTML_CONTENT_TYPE);
+  response.setHeader("content-type", TEXT_HTML_CONTENT_TYPE);
 
   response.status(OK_200_STATUS_CODE);
 

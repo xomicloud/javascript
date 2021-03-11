@@ -31,9 +31,9 @@ function setAuthoriseLocationHeader(response, createAccount = false) {
 
   const encodedParameters = encodeParameters(parameters),
         queryString = encodedParameters,  ///
-        Location = `${CLIENT_HOST}?${queryString}`;
+        location = `${CLIENT_HOST}?${queryString}`;
 
-  response.setHeader("Location", Location);
+  response.setHeader("location", location);
 }
 
 module.exports = {

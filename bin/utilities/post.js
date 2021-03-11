@@ -24,10 +24,14 @@ function post(url, headers, parameters, callback) {
       const { body } = response,
             jsonString = body;  ///
 
-      json = JSON.parse(jsonString);
+      try {
+        json = JSON.parse(jsonString);
+      } catch (error) {
+        ///
+      }
     }
 
-    callback(error, json);
+    callback(json);
   });
 }
 

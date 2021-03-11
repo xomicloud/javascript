@@ -13,34 +13,49 @@ const { post } = postUtilities,
 function callbackHandler(request, response, next) {
   const { AUTHENTICATE_HOST } = process.env,
         { query } = request,
-        { code, remember_me } = query,
-        rememberMe = !!remember_me,
+        { code } = query,
         callbackPostHeaders = createCallbackPostHeaders(),
         callbackPostParameters = createCallbackPostParameters(code),
         url = AUTHENTICATE_HOST,  ///
         headers = callbackPostHeaders,  ///
         parameters = callbackPostParameters;  ///
 
-  post(url, headers, parameters, (error, json) => {
+  post(url, headers, parameters, (json) => {
+    if (json === null) {
+      const { TEXT_PLAIN_CONTENT_TYPE,
+              INTERNAL_SERVER_ERROR_500_MESSAGE,
+              INTERNAL_SERVER_ERROR_500_STATUS_CODE } = constants;
+
+      response.setHeader("content-type", TEXT_PLAIN_CONTENT_TYPE);
+
+      response.status(INTERNAL_SERVER_ERROR_500_STATUS_CODE);
+
+      response.end(INTERNAL_SERVER_ERROR_500_MESSAGE);
+
+      return;
+    }
+
+    let location;
+
     const { access_token } = json,
           { SEE_OTHER_303_STATUS_CODE } = constants;
 
-    let Location;
-
     if (access_token) {
       const { HOME_PAGE_PATH } = paths,
-            accessToken = access_token; ///
+            { remember_me } = query,
+            accessToken = access_token, ///
+            rememberMe = !!remember_me;
 
-      Location = HOME_PAGE_PATH; ///
+      location = HOME_PAGE_PATH; ///
 
       setAuthenticationCookie(response, accessToken, rememberMe);
     } else {
       const { SIGN_IN_PATH } = paths;
 
-      Location = SIGN_IN_PATH;  ///
+      location = SIGN_IN_PATH;  ///
     }
 
-    response.setHeader("Location", Location);
+    response.setHeader("location", location);
 
     response.status(SEE_OTHER_303_STATUS_CODE);
 
