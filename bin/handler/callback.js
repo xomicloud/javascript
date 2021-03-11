@@ -37,13 +37,12 @@ function callbackHandler(request, response, next) {
 
     let location;
 
-    const { access_token } = json,
+    const { accessToken } = json,
           { SEE_OTHER_303_STATUS_CODE } = constants;
 
-    if (access_token) {
+    if (accessToken) {
       const { HOME_PAGE_PATH } = paths,
             { remember_me } = query,
-            accessToken = access_token, ///
             rememberMe = !!remember_me;
 
       location = HOME_PAGE_PATH; ///

@@ -4,9 +4,8 @@ const constants = require("../constants");
 
 function setAuthenticationCookie(response, accessToken, rememberMe) {
   const authenticationCookieName = getAuthenticationCookieName(),
-        access_token = accessToken, ///
         json = {
-          access_token
+          accessToken
         },
         name = authenticationCookieName,  ///
         value = JSON.stringify(json),
