@@ -7,12 +7,10 @@ const paths = require("../paths"),
 const { parseFile } = templateUtilities;
 
 function createHomePageContent() {
-  const { DISPLAY_NAME } = process.env,
-        { SIGN_OUT_PATH } = paths,
+  const { SIGN_OUT_PATH } = paths,
         { HOME_PAGE_TEMPLATE_FILE_NAME } = constants,
         homePageTemplateFileName = HOME_PAGE_TEMPLATE_FILE_NAME,  ///
         args = {
-          DISPLAY_NAME,
           SIGN_OUT_PATH
         },
         homePageContent = parseTemplateFile(homePageTemplateFileName, args);
