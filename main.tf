@@ -38,18 +38,3 @@ resource "aws_apigatewayv2_api" "lambda_api" {
   protocol_type = "HTTP"
   target        = aws_lambda_function.lambda_function.arn
 }
-
-/*
-data aws_iam_role "lambda_role" {
-  name = "lambda_role"
-}
-
-resource "aws_lambda_function" "lambda_function" {
-  role             = data.aws_iam_role.lambda_role.arn
-  handler          = "bin/lambda.handler"
-  runtime          = "nodejs12.x"
-  filename         = "lambda.zip"
-  function_name    = "lambda_function"
-  source_code_hash = filesha256("lambda.zip")
-}
-*/
