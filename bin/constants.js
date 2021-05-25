@@ -1,8 +1,14 @@
 "use strict";
 
-const EMPTY_STATE = "",
-      POST_METHOD = "POST",
+const END = "end",
+      POST = "POST",
+      DATA = "data",
+      COLON = ":",
+      ERROR = "error",
+      EMPTY_STATE = "",
+      CONTENT_TYPE = "content-type",
       OPEN_ID_SCOPE = "openid",
+      CONTENT_LENGTH = "content-length",
       CODE_RESPONSE_TYPE = "code",
       AUTHORIZATION_CODE_GRANT_TYPE = "authorization_code",
       AUTHENTICATION_COOKIE_NAME_PREFIX = "authentication",
@@ -19,9 +25,15 @@ const EMPTY_STATE = "",
       APPLICATION_X_WWW_FORM_ENCODED_CONTENT_TYPE = "application/x-www-form-urlencoded";
 
 module.exports = {
+  END,
+  POST,
+  DATA,
+  COLON,
+  ERROR,
   EMPTY_STATE,
-  POST_METHOD,
+  CONTENT_TYPE,
   OPEN_ID_SCOPE,
+  CONTENT_LENGTH,
   CODE_RESPONSE_TYPE,
   AUTHORIZATION_CODE_GRANT_TYPE,
   TEMPLATE_DIRECTORY_PATH,

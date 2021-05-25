@@ -1,27 +1,29 @@
 "use strict";
 
 const paths = require("../paths"),
+      request = require("../request"),
       constants = require("../constants"),
-      postUtilities = require("../utilities/post"),
       cookieUtilities = require("../utilities/cookie"),
       callbackUtilities = require("../utilities/callback");
 
-const { post } = postUtilities,
+const { post } = request,
+      { END, DATA } = constants,
       { setAuthenticationCookie } = cookieUtilities,
       { createCallbackPostHeaders, createCallbackPostParameters } = callbackUtilities;
 
 function callbackHandler(request, response, next) {
-  const { AUTHENTICATE_HOST } = process.env,
+  const { CLIENT_HOST } = process.env,
         { query } = request,
         { code } = query,
         callbackPostHeaders = createCallbackPostHeaders(),
         callbackPostParameters = createCallbackPostParameters(code),
-        url = AUTHENTICATE_HOST,  ///
+        host = CLIENT_HOST,  ///
+        uri = "/",
         headers = callbackPostHeaders,  ///
         parameters = callbackPostParameters;  ///
 
-  post(url, headers, parameters, (json) => {
-    if (json === null) {
+  post(host, uri, headers, parameters, (error, remoteResponse) => {
+    if (error) {
       const { TEXT_PLAIN_CONTENT_TYPE,
               INTERNAL_SERVER_ERROR_500_MESSAGE,
               INTERNAL_SERVER_ERROR_500_STATUS_CODE } = constants;
@@ -35,32 +37,56 @@ function callbackHandler(request, response, next) {
       return;
     }
 
-    let location;
+    bodyFromResponse(remoteResponse, (body) => {
+      let json;
 
-    const { access_token } = json,
-          { SEE_OTHER_303_STATUS_CODE } = constants;
+      const jsonString = body;  ///
 
-    if (access_token) {
-      const { HOME_PAGE_PATH } = paths,
-            { remember_me } = query,
-            accessToken = access_token, ///
-            rememberMe = !!remember_me;
+      try {
+        json = JSON.parse(jsonString);
+      } catch (error) {
+        ///
+      }
 
-      location = HOME_PAGE_PATH; ///
+      let location;
 
-      setAuthenticationCookie(response, accessToken, rememberMe);
-    } else {
-      const { SIGN_IN_PATH } = paths;
+      const { access_token } = json,
+            { SEE_OTHER_303_STATUS_CODE } = constants;
 
-      location = SIGN_IN_PATH;  ///
-    }
+      if (access_token) {
+        const { HOME_PAGE_PATH } = paths,
+              { remember_me } = query,
+              accessToken = access_token, ///
+              rememberMe = !!remember_me;
 
-    response.setHeader("location", location);
+        location = HOME_PAGE_PATH; ///
 
-    response.status(SEE_OTHER_303_STATUS_CODE);
+        setAuthenticationCookie(response, accessToken, rememberMe);
+      } else {
+        const { SIGN_IN_PATH } = paths;
 
-    response.end("");
+        location = SIGN_IN_PATH;  ///
+      }
+
+      response.setHeader("location", location);
+
+      response.status(SEE_OTHER_303_STATUS_CODE);
+
+      response.end("");
+    });
   });
 }
 
 module.exports = callbackHandler;
+
+function bodyFromResponse(response, callback) {
+  let body = "";
+
+  response.on(DATA, (data) => {
+    body += data;
+  });
+
+  response.on(END, () => {
+    callback(body);
+  });
+}
