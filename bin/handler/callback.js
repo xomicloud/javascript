@@ -1,28 +1,30 @@
 "use strict";
 
+const { Readable } = require("stream"),
+      { requestUtilities } = require("necessary");
+
 const paths = require("../paths"),
-      request = require("../request"),
       constants = require("../constants"),
       cookieUtilities = require("../utilities/cookie"),
       callbackUtilities = require("../utilities/callback");
 
-const { post } = request,
+const { post } = requestUtilities,
       { END, DATA } = constants,
       { setAuthenticationCookie } = cookieUtilities,
-      { createCallbackPostHeaders, createCallbackPostParameters } = callbackUtilities;
+      { createHeaders, createContent } = callbackUtilities;
 
 function callbackHandler(request, response, next) {
   const { CLIENT_HOST } = process.env,
         { query } = request,
         { code } = query,
-        callbackPostHeaders = createCallbackPostHeaders(),
-        callbackPostParameters = createCallbackPostParameters(code),
+        content = createContent(code),
         host = CLIENT_HOST,  ///
         uri = "/",
-        headers = callbackPostHeaders,  ///
-        parameters = callbackPostParameters;  ///
+        headers = createHeaders(content),
+        parameters = {},  ///
+        readable = Readable.from(content);
 
-  post(host, uri, headers, parameters, (error, remoteResponse) => {
+  const _request = post(host, uri, parameters, headers, (error, remoteResponse) => {
     if (error) {
       const { TEXT_PLAIN_CONTENT_TYPE,
               INTERNAL_SERVER_ERROR_500_MESSAGE,
@@ -75,6 +77,8 @@ function callbackHandler(request, response, next) {
       response.end("");
     });
   });
+
+  readable.pipe(_request);
 }
 
 module.exports = callbackHandler;

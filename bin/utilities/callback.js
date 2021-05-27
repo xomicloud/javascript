@@ -1,39 +1,53 @@
 "use strict";
 
+const { httpUtilities } = require("necessary");
+
 const constants = require("../constants");
 
-function createCallbackPostHeaders() {
+const { queryStringFromParameters } = httpUtilities;
+
+function createHeaders(content) {
   const { APPLICATION_JSON_CONTENT_TYPE, APPLICATION_X_WWW_FORM_ENCODED_CONTENT_TYPE } = constants,
         { CLIENT_ID, CLIENT_SECRET } = process.env,
         digest = `${CLIENT_ID}:${CLIENT_SECRET}`,
         encodedDigest = Buffer.from(digest).toString("base64"),  ///
-        Accept = APPLICATION_JSON_CONTENT_TYPE,  ///
-        ContentType = APPLICATION_X_WWW_FORM_ENCODED_CONTENT_TYPE, ///
-        Authorization = `Basic ${encodedDigest}`,
-        callbackPostHeaders = {
-          "Accept" : Accept,
-          "Content-Type" : ContentType,
-          "Authorization" : Authorization
+        accept = APPLICATION_JSON_CONTENT_TYPE,  ///
+        contentType = APPLICATION_X_WWW_FORM_ENCODED_CONTENT_TYPE, ///
+        contentLength = content.length,
+        authorization = `Basic ${encodedDigest}`,
+        createHeaders = {
+          "accept" : accept,
+          "content-type" : contentType,
+          "content-length" : contentLength,
+          "authorization" : authorization
         };
 
-  return callbackPostHeaders;
+  return createHeaders;
 }
 
-function createCallbackPostParameters(code) {
+function createContent(code) {
+  const parameters = createParameters(code),
+        queryString = queryStringFromParameters(parameters),
+        content = queryString;  ///
+
+  return content;
+}
+
+module.exports = {
+  createHeaders,
+  createContent
+};
+
+function createParameters(code) {
   const { REDIRECT_URI } = process.env,
         { AUTHORIZATION_CODE_GRANT_TYPE } = constants,
         grant_type = AUTHORIZATION_CODE_GRANT_TYPE,  ///
         redirect_uri = REDIRECT_URI,  ///
-        callbackPostParameters = {
+        parameters = {
           "code" : code,
           "grant_type" : grant_type,
           "redirect_uri" : redirect_uri
         };
 
-  return callbackPostParameters;
+  return parameters;
 }
-
-module.exports = {
-  createCallbackPostHeaders,
-  createCallbackPostParameters
-};
