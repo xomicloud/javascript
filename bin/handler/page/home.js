@@ -1,38 +1,25 @@
 "use strict";
 
-const constants = require("../../constants"),
-      cookieUtilities = require("../../utilities/cookie"),
-      contentUtilities = require("../../utilities/content"),
-      headersUtilities = require("../../utilities/headers");
+const options = require("../../options"),
+      contentUtilities = require("../../utilities/content");
 
-const { createHomePageContent } = contentUtilities,
-      { setAuthoriseLocationHeader } = headersUtilities,
-      { isAuthenticationCookiePresent } = cookieUtilities;
+const { http, oAuth, cookie } = require("../../../lib/main"); ///
+
+const { createHomePageHTML } = contentUtilities;
 
 function homePageHandler(request, response, next) {
-  const { SEE_OTHER_303_STATUS_CODE } = constants,
-        authenticationCookiePresent = isAuthenticationCookiePresent(request),
-        signedIn = authenticationCookiePresent;  ///
+  const authenticationCookiePresent = cookie.isAuthenticationCookiePresent(options, request);
 
-  if (!signedIn) {
-    setAuthoriseLocationHeader(response);
-
-    response.status(SEE_OTHER_303_STATUS_CODE);
-
-    response.end("");
+  if (!authenticationCookiePresent) {
+    oAuth.redirect(options, response);
 
     return;
   }
 
-  const { OK_200_STATUS_CODE, TEXT_HTML_CONTENT_TYPE } = constants,
-        homePageContent = createHomePageContent(),
-        content = homePageContent;  ///
+  const homePageHTML = createHomePageHTML(),
+        html = homePageHTML;  ///
 
-  response.setHeader("content-type", TEXT_HTML_CONTENT_TYPE);
-
-  response.status(OK_200_STATUS_CODE);
-
-  response.end(content);
+  http.html(response, html);
 }
 
 module.exports = homePageHandler;

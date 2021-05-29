@@ -1,19 +1,13 @@
 "use strict";
 
-const constants = require("../constants"),
-      headersUtilities = require("../utilities/headers");
+const { oAuth } = require("../../lib/main"); ///
 
-const { setAuthoriseLocationHeader } = headersUtilities;
+const options = require("../options");
 
 function signInHandler(request, response, next) {
-  const { SEE_OTHER_303_STATUS_CODE } = constants,
-        createAccount = false;
+  const createAccount = false;
 
-  setAuthoriseLocationHeader(response, createAccount);
-
-  response.status(SEE_OTHER_303_STATUS_CODE);
-
-  response.end("");
+  oAuth.redirect(options, response, createAccount);
 }
 
 module.exports = signInHandler;

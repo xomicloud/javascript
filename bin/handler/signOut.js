@@ -1,23 +1,13 @@
 "use strict";
 
-const constants = require("../constants"),
-      cookieUtilities = require("../utilities/cookie"),
-      headersUtilities = require("../utilities/headers");
+const { cookie, oAuth } = require("../../lib/main"); ///
 
-const { removeAuthenticationCookie } = cookieUtilities,
-      { setAuthoriseLocationHeader } = headersUtilities;
+const options = require("../options");
 
 function signOutHandler(request, response, next) {
-  const { SEE_OTHER_303_STATUS_CODE } = constants,
-        createAccount = false;
+  cookie.removeAuthenticationCookie(options, response);
 
-  removeAuthenticationCookie(response);
-
-  setAuthoriseLocationHeader(response, createAccount);
-
-  response.status(SEE_OTHER_303_STATUS_CODE);
-
-  response.end("");
+  oAuth.redirect(options, response);
 }
 
 module.exports = signOutHandler;

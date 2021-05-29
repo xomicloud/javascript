@@ -6,20 +6,20 @@ const paths = require("../paths"),
 
 const { parseFile } = templateUtilities;
 
-function createHomePageContent() {
+function createHomePageHTML() {
   const { SIGN_OUT_PATH } = paths,
         { HOME_PAGE_TEMPLATE_FILE_NAME } = constants,
         homePageTemplateFileName = HOME_PAGE_TEMPLATE_FILE_NAME,  ///
         args = {
           SIGN_OUT_PATH
         },
-        homePageContent = parseTemplateFile(homePageTemplateFileName, args);
+        homePageHTML = parseTemplateFile(homePageTemplateFileName, args); ///
 
-  return homePageContent;
+  return homePageHTML;
 }
 
 module.exports = {
-  createHomePageContent
+  createHomePageHTML
 };
 
 function parseTemplateFile(templateFileName, args) {
