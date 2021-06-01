@@ -1,6 +1,6 @@
 "use strict";
 
-const { http, oAuth, cookie } = require("../../lib/main");  ///
+const { http, oAuth, cookie } = require("@xomicloud/xomi");
 
 const paths = require("../paths"),
       options = require("../options");

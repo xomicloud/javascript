@@ -1,6 +1,6 @@
 "use strict";
 
-const { oAuth } = require("../../lib/main"); ///
+const { oAuth } = require("@xomicloud/xomi");
 
 const options = require("../options");
 

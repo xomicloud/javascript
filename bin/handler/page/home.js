@@ -3,7 +3,7 @@
 const options = require("../../options"),
       contentUtilities = require("../../utilities/content");
 
-const { http, oAuth, cookie } = require("../../../lib/main"); ///
+const { http, oAuth, cookie } = require("@xomicloud/xomi");
 
 const { createHomePageHTML } = contentUtilities;
 
