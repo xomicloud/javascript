@@ -1,9 +1,9 @@
 "use strict";
 
+const { http, oAuth, cookie } = require("@xomicloud/xomi");
+
 const options = require("../../options"),
       contentUtilities = require("../../utilities/content");
-
-const { http, oAuth, cookie } = require("@xomicloud/xomi");
 
 const { createHomePageHTML } = contentUtilities;
 
