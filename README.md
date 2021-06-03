@@ -47,7 +47,7 @@ When running the application as a lambda, a different entry point is used. For r
 
 ## Related links
 
-* [GitHub - Xomi](https://github.com/xomicloud/xomi)
+* [npm - Xomi](https://www.npmjs.com/package/@xomicloud/xomi)
 * [Developers - JavaScript Lambda Tutorial](https://developers.xomi.cloud/tutorial/javascript-lambda)
 * [Knowledge base - The Anatomy of a Secure Application](https://developers.xomi.cloud/knowledge-base/anatomy-of-secure-application)
 
