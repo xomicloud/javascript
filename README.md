@@ -18,11 +18,11 @@ You can clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-Before running you will need to configure the application, which requires a corresponding Xomi client. In order to create one, If you have not already done so then create a Xomi [account](https://account.xomi.cloud/). Once you have an account, follow the wizard for creating a client and when prompted fill in the following value, assuming that you want to run the application locally to begin with:
+Before running you will need to configure the application, which requires a corresponding Xomi client. In order to create one, if you have not done so already then create a Xomi [account](https://account.xomi.cloud/). Once you have an account, follow the wizard for creating a client and when prompted fill in the following values, assuming that you want to run the application locally to begin with:
 
-* **Name** Anything you want.
+* **Name** Anything you want. This is for internal display within Xomi only.
 
-* **Display name** Anything you want again.
+* **Display name** Anything you want again. This appears to users on buttons and the like.
 
 * **Host** `http://localhost:8080` is recommended.
 
@@ -34,7 +34,7 @@ Now create a file to hold the environment variables...
 touch variables.env
 ```
 
-...and copy the Xomi client's environment variables into it.
+...and copy the Xomi client's environment variables into it. Your client can be found in the [clients](https://account.xomi.cloud/clients) section in your Xomi account. Click on the client name and they will appear in a table near the foot of page.
 
 You should also add an environment variable for the port that matches the port number chosen for the host and redirect URI:
 
