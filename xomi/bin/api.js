@@ -1,18 +1,19 @@
 "use strict";
 
 const { requestUtilities } = require("necessary"),
-      { pipelineUtilities, authorisationUtilities } = require("@xomicloud/xomi");
+      { contentUtilities, pipelineUtilities, authorisationUtilities } = require("@xomicloud/xomi");
 
 const { POST_METHOD, API_XOMI_CLOUD_HOST } = require("./constants");
 
 const { pipeline } = pipelineUtilities,
+      { createContentHeaders } = contentUtilities,
       { request: remoteRequest } = requestUtilities,
-      { createBasicAuthorisationHeader } = authorisationUtilities;
+      { createBasicAuthorisation } = authorisationUtilities;
 
 function api(options, request, response) {
   const { method, query, originalUrl } = request,
-        authorisationHeader = createBasicAuthorisationHeader(options),
-        authorization = authorisationHeader,  ///
+        basicAuthorisation = createBasicAuthorisation(options),
+        authorization = basicAuthorisation,  ///
         host = API_XOMI_CLOUD_HOST,  ///
         uri = originalUrl,  ///
         parameters = query, ///
@@ -21,7 +22,7 @@ function api(options, request, response) {
         };
 
   if (method === POST_METHOD) {
-    const contentHeaders = contentHeadersFromRequest(request);
+    const contentHeaders = createContentHeaders(request);
 
     Object.assign(headers, contentHeaders);
   }
