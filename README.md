@@ -18,7 +18,7 @@ You can clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-Before running you will need to configure the application, which requires a corresponding Xomi client. In order to create one, If you have not already done so then create a Xomi [account](https://account.xomi.cloud/). Once you have an account, follow the wizard for creating a client and when prompted fill in the following values, assuming that you want to run the application locally to begin with:
+Before running you will need to configure the application, which requires a corresponding Xomi client. In order to create one, If you have not already done so then create a Xomi [account](https://account.xomi.cloud/). Once you have an account, follow the wizard for creating a client and when prompted fill in the following value, assuming that you want to run the application locally to begin with:
 
 * **Name** Anything you want.
 
@@ -26,9 +26,37 @@ Before running you will need to configure the application, which requires a corr
 
 * **Host** `http://localhost:8080` is recommended.
 
-* **Redirect URI** `http://localhost:8080/callback` is recommended. Whatever you choose, the port number must match the host and the URI must be `/callback` unless you want to change the application to support a different one.
+* **Redirect URI** `http://localhost:8080/callback` is recommended. Whatever you choose, the port number must match that of the host and the URI must be `/callback` unless you want to change the application to support a different one.
 
+Now create a file to hold the environment variables...
 
+```
+touch variables.env
+```
+
+...and copy the Xomi client's environment variables into it.
+
+You should also add an environment variable for the port that matches the port number chosen for the host and redirect URI:
+
+```
+export PORT=8080
+```
+
+Now, from a terminal, export the environment variables...environment
+
+```
+source variables.env
+```
+
+...and run the application:
+
+```
+npm start
+```
+
+If all has gone to plan it will be available at http://localhost:8808
+
+Bear in mind that the first time you visit the site you will immediately be redirected to Xomi's authentication site because the site has no user account. You will have to create an account before you can sign in. This account is associated with the client and is entirely separate from your Xomi account.
 
 ## Related links
 
