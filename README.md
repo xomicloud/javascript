@@ -42,7 +42,7 @@ You should also add an environment variable for the port that matches the port n
 export PORT=8080
 ```
 
-Now, from a terminal, export the environment variables...environment
+Now export the environment variables from a terminal...
 
 ```
 source variables.env
@@ -54,9 +54,9 @@ source variables.env
 npm start
 ```
 
-If all has gone to plan it will be available at http://localhost:8808
+If all has gone to plan it will be available at http://localhost:8080.
 
-Bear in mind that the first time you visit the site you will immediately be redirected to Xomi's authentication site because the site has no user account. You will have to create an account before you can sign in. This account is associated with the client and is entirely separate from your Xomi account.
+Note that you will immediately be redirected to Xomi's authentication site because the site initially has no user accounts. You will have to create an account before you can sign in. This account is associated with the client and is entirely separate from your Xomi account.
 
 ## Related links
 
