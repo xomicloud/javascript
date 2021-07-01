@@ -4,7 +4,7 @@
 
 This is a JavaScript secure application which can run locally, as an AWS lambda or indeed in many other ways.
 
-Instructions for getting it up and running, which includes integrating it with Xomi, can be found in either of the tutorials listed in the related links section at the foot of this readme file.
+Instructions for getting it up and running, which include integrating it with Xomi, can be found in either of the tutorials listed in the related links section at the foot of this readme file.
 
 ## Installation
 
@@ -18,7 +18,7 @@ You can clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-Before launching you will need to configure the application. In order to do so, you need to have created a corresponding Xomi client. If you have not already done so, create a Xomi [account](https://account.xomi.cloud/) and then follow the wizard for creating a client. When prompted, fill in the following values, Assuming that you want to run the application locally to begin with:
+Before running you will need to configure the application, which requires a corresponding Xomi client. In order to create one, If you have not already done so then create a Xomi [account](https://account.xomi.cloud/). Once you have an account, follow the wizard for creating a client and when prompted fill in the following values, assuming that you want to run the application locally to begin with:
 
 * **Name** Anything you want.
 
