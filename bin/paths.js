@@ -4,6 +4,7 @@ const SIGN_IN_PATH = "/sign-in",
       SIGN_OUT_PATH = "/sign-out",
       CALLBACK_PATH = "/callback",
       HOME_PAGE_PATH = "/", ///
+      GOOGLE_DRIVE_PATH = "/google-drive/*",
       CREATE_ACCOUNT_PATH = "/create-account";
 
 module.exports = {
@@ -11,5 +12,6 @@ module.exports = {
   SIGN_OUT_PATH,
   CALLBACK_PATH,
   HOME_PAGE_PATH,
+  GOOGLE_DRIVE_PATH,
   CREATE_ACCOUNT_PATH
 };
