@@ -11,7 +11,7 @@ function callbackHandler(request, response, next) {
 
   oAuth.callback(options, code, (error, accessToken) => {
     if (error) {
-      http.internalServerError(response, error);
+      http.badGatewayError(response, error);
 
       return;
     }
