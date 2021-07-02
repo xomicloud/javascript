@@ -1,6 +1,6 @@
 "use strict";
 
-const { api } = require("../../xomi");  ///
+const { api } = require("@xomicloud/xomi");
 
 const options = require("../options");
 
