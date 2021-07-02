@@ -11,11 +11,11 @@ const { pipeline } = pipelineUtilities,
       { createBasicAuthorisation } = authorisationUtilities;
 
 function api(options, request, response) {
-  const { method, query, originalUrl } = request,
+  const { method, query, url } = request,
         basicAuthorisation = createBasicAuthorisation(options),
         authorization = basicAuthorisation,  ///
         host = API_XOMI_CLOUD_HOST,  ///
-        uri = originalUrl,  ///
+        uri = url,  ///
         parameters = query, ///
         headers = {
           authorization
