@@ -2,13 +2,12 @@
 
 const express = require("express");
 
-const paths = require("../paths"),
-      signInHandler = require("../handler/signIn"),
+const signInHandler = require("../handler/signIn"),
       signOutHandler = require("../handler/signOut"),
       callbackHandler = require("../handler/callback"),
       createAccountHandler = require("../handler/createAccount");
 
-const { SIGN_IN_PATH, SIGN_OUT_PATH, CALLBACK_PATH, CREATE_ACCOUNT_PATH } = paths;
+const { SIGN_IN_PATH, SIGN_OUT_PATH, CALLBACK_PATH, CREATE_ACCOUNT_PATH } = require("../paths");
 
 const unrestrictedRouter = express.Router(); ///
 

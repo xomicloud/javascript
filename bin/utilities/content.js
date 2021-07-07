@@ -1,15 +1,11 @@
 "use strict";
 
-const paths = require("../paths"),
-      constants = require("../constants"),
-      templateUtilities = require('../utilities/template');
-
-const { parseFile } = templateUtilities;
+const { parseFile } = require('../utilities/template'),
+      { SIGN_OUT_PATH } = require("../paths"),
+      { HOME_PAGE_TEMPLATE_FILE_NAME, TEMPLATE_DIRECTORY_PATH } = require("../constants");
 
 function createHomePageHTML() {
-  const { SIGN_OUT_PATH } = paths,
-        { HOME_PAGE_TEMPLATE_FILE_NAME } = constants,
-        homePageTemplateFileName = HOME_PAGE_TEMPLATE_FILE_NAME,  ///
+  const homePageTemplateFileName = HOME_PAGE_TEMPLATE_FILE_NAME,  ///
         args = {
           SIGN_OUT_PATH
         },
@@ -23,8 +19,7 @@ module.exports = {
 };
 
 function parseTemplateFile(templateFileName, args) {
-  const { TEMPLATE_DIRECTORY_PATH } = constants,
-        templateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${templateFileName}`,
+  const templateFilePath = `${TEMPLATE_DIRECTORY_PATH}/${templateFileName}`,
         content = parseFile(templateFilePath, args);
 
   return content;

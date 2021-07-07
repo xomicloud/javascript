@@ -2,8 +2,9 @@
 
 const { http, oAuth, cookie } = require("@xomicloud/xomi");
 
-const paths = require("../paths"),
-      options = require("../options");
+const options = require("../options");
+
+const { SIGN_IN_PATH, HOME_PAGE_PATH } = require("../paths");
 
 function callbackHandler(request, response, next) {
   const { query } = request,
@@ -19,12 +20,9 @@ function callbackHandler(request, response, next) {
     let location;
 
     if (accessToken === null) {
-      const { SIGN_IN_PATH } = paths;
-
       location = SIGN_IN_PATH;  ///
     } else {
-      const { HOME_PAGE_PATH } = paths,
-            { remember_me } = query,
+      const { remember_me } = query,
             rememberMe = !!remember_me;
 
       location = HOME_PAGE_PATH; ///
